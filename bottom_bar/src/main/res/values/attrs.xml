@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomBarView">
+        <!--选中状态颜色-->
+        <attr name="bb_active_color"  format="color"/>
+        <!--未选中状态颜色-->
+        <attr name="bb_inactive_color"  format="color"/>
+        <!--背景颜色-->
+        <attr name="bb_bg_color"  format="color"/>
+        <!--选中后图片大小-->
+        <attr name="bb_active_imgsize"  format="dimension"/>
+        <!--未选中图片大小-->
+        <attr name="bb_inactive_imgsize"  format="dimension"/>
+        <!--选中后文字大小-->
+        <attr name="bb_active_tvsize"  format="dimension"/>
+        <!--未选中文字大小-->
+        <attr name="bb_inactive_tvsize"  format="dimension"/>
+        <!--缩放级别-->
+        <attr name="bb_scalelevel"  format="float"/>
+
+    </declare-styleable>
+</resources>

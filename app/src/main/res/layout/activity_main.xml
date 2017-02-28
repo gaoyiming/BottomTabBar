@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:context="com.example.mr_g.bottombar.MainActivity">
+
+
+    <!--<com.mr_gao.bottombar.BottomBarView-->
+       <!--app:bb_active_color="#123456"-->
+        <!--app:bb_inactive_color="#098765"-->
+        <!--android:id="@+id/bottombar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_height="60dp">-->
+
+    <!--</com.mr_gao.bottombar.BottomBarView>-->
+    <com.mr_gao.bottombar.BottomTabView
+        android:id="@+id/bottom_tab"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+    </com.mr_gao.bottombar.BottomTabView>
+</RelativeLayout>

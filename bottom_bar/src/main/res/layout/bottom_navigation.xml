@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tab_height"
+    android:minWidth="@dimen/tab_min_width"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/tab_padding_bottom"
+    android:paddingLeft="@dimen/tab_padding_left"
+    android:paddingRight="@dimen/tab_padding_right"
+    android:background="?selectableItemBackgroundBorderless"
+    android:paddingTop="@dimen/tab_padding_top_inactive">
+
+    <ImageView
+    android:id="@+id/tab_item_icon"
+    android:layout_width="@dimen/tab_icon"
+    android:layout_height="@dimen/tab_icon"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tab_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="center"
+        android:lines="1"
+        android:textSize="@dimen/tab_text_size_inactive"
+       />
+
+</FrameLayout>
