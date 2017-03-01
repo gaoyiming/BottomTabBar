@@ -29,6 +29,7 @@ public class BottomTabView extends LinearLayout {
     private int active_color;
 
     private ItemClickListener itemClickListener;
+    private RepeatClickListener repeatClickListener;
     ArrayList<TabItem> tabItems = new ArrayList<>();
 
     public BottomTabView(Context context) {
@@ -62,9 +63,9 @@ public class BottomTabView extends LinearLayout {
         LinearLayout.LayoutParams containerparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         for (int i = 0; i < drawableres.length; i++) {
-
+            final int index = i;
             TabItem tabItem = new TabItem(getContext(), drawableres[i], textres[i]);
-            tabItem.setTag(i);
+
             tabItem.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
             if (i % 2 == 0) {
                 tabItem.setBackgroundColor(Color.BLACK);
@@ -73,24 +74,31 @@ public class BottomTabView extends LinearLayout {
             }
             tabItems.add(tabItem);
             addView(tabItem);
+            tabItem.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemClickListener.click(index);
+                    setItemChecked(tabItems, index);
+                }
+            });
         }
-        for (int i = 0; i < tabItems.size(); i++) {
 
-             TabItem tabItem = tabItems.get(i);
-            setItemChecked(tabItems, i);
-
-        }
 
     }
 
     private void setItemChecked(ArrayList<TabItem> tabItems, int currentitem) {
+        int LastCheckNum=-1;
         for (int i = 0; i < tabItems.size(); i++) {
+            if(LastCheckNum==currentitem){
+                repeatClickListener.repeatClick(currentitem);
+            }
             if (i == currentitem) {
-                itemClickListener.click(currentitem);
+
                 tabItems.get(i).setChecked(true);
             } else {
                 tabItems.get(i).setChecked(false);
             }
+            LastCheckNum=currentitem;
 
         }
     }
@@ -126,6 +134,10 @@ public class BottomTabView extends LinearLayout {
         super.onDraw(canvas);
         Log.e("onDraw", "onDraw");
 
+    }
+
+    public void setRepeatClickListener(RepeatClickListener click) {
+        this.repeatClickListener=click;
     }
     //    public void setData(){
 //

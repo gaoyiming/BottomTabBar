@@ -53,12 +53,7 @@ public class TabItem extends RelativeLayout {
         tab_item_icon = (ImageView) view.findViewById(R.id.tab_item_icon);
         tab_item_title = (TextView) view.findViewById(R.id.tab_item_title);
         tab_number = (TextView) view.findViewById(R.id.tab_number);
-        view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //getTag()
-            }
-        });
+
     }
 
     public boolean isChecked() {

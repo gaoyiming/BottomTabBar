@@ -9,6 +9,7 @@ import android.view.View;
 import com.mr_gao.bottombar.BottomBarView;
 import com.mr_gao.bottombar.BottomTabView;
 import com.mr_gao.bottombar.ItemClickListener;
+import com.mr_gao.bottombar.RepeatClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void click(int i) {
                 Log.e("click",""+i);
+            }
+        });
+        bottom_tab.setRepeatClickListener(new RepeatClickListener() {
+            @Override
+            public void repeatClick(int currentitem) {
+                Log.e("repeatClick",""+currentitem);
             }
         });
 //        assert bottombar != null;
