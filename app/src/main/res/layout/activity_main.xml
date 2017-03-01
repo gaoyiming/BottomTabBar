@@ -18,10 +18,10 @@
         <!--android:layout_height="60dp">-->
 
     <!--</com.mr_gao.bottombar.BottomBarView>-->
-    <com.mr_gao.bottombar.BottomTabView
+    <com.mr_gao.bottombar.BottomNavigaterView
         android:id="@+id/bottom_tab"
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
-    </com.mr_gao.bottombar.BottomTabView>
+    </com.mr_gao.bottombar.BottomNavigaterView>
 </RelativeLayout>

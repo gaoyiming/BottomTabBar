@@ -63,4 +63,8 @@ public class TabItem extends RelativeLayout {
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
+
+    public void setNumber(int num) {
+        tab_number.setText(num+"");
+    }
 }

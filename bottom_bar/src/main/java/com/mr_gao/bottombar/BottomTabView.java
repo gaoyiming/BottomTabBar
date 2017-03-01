@@ -27,7 +27,7 @@ public class BottomTabView extends LinearLayout {
     private Context context;
     private int inactive_color;
     private int active_color;
-
+    private int LastCheckNum=-1;
     private ItemClickListener itemClickListener;
     private RepeatClickListener repeatClickListener;
     ArrayList<TabItem> tabItems = new ArrayList<>();
@@ -87,20 +87,21 @@ public class BottomTabView extends LinearLayout {
     }
 
     private void setItemChecked(ArrayList<TabItem> tabItems, int currentitem) {
-        int LastCheckNum=-1;
-        for (int i = 0; i < tabItems.size(); i++) {
-            if(LastCheckNum==currentitem){
-                repeatClickListener.repeatClick(currentitem);
-            }
-            if (i == currentitem) {
 
+        if(LastCheckNum==currentitem){
+            repeatClickListener.repeatClick(currentitem);
+        }
+        for (int i = 0; i < tabItems.size(); i++) {
+
+            if (i == currentitem) {
                 tabItems.get(i).setChecked(true);
             } else {
                 tabItems.get(i).setChecked(false);
             }
-            LastCheckNum=currentitem;
 
         }
+        LastCheckNum=currentitem;
+
     }
 
     public void setItemClickListener(@NonNull ItemClickListener itemClickListener) {
@@ -145,4 +146,10 @@ public class BottomTabView extends LinearLayout {
 //    public void setData(){
 //
 //    }
+    public void  setNumber(int index,int num){
+
+        tabItems.get(index).setNumber(num);
+    }
+
 }
+
