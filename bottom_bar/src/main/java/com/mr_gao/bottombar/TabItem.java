@@ -65,6 +65,6 @@ public class TabItem extends RelativeLayout {
     }
 
     public void setNumber(int num) {
-        tab_number.setText(num+"");
+        tab_number.setText(num+"+");
     }
 }
