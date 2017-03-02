@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    android:orientation="vertical"
     tools:context="com.example.mr_g.bottombar.MainActivity">
 
 
     <!--<com.mr_gao.bottombar.BottomBarView-->
-       <!--app:bb_active_color="#123456"-->
-        <!--app:bb_inactive_color="#098765"-->
-        <!--android:id="@+id/bottombar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_height="60dp">-->
+    <!--app:bb_active_color="#123456"-->
+    <!--app:bb_inactive_color="#098765"-->
+    <!--android:id="@+id/bottombar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_height="60dp">-->
 
     <!--</com.mr_gao.bottombar.BottomBarView>-->
+    <!--<FrameLayout-->
+        <!--android:layout_weight="1"-->
+        <!--android:id="@+id/framelayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp">-->
+
+    <!--</FrameLayout>-->
+    <android.support.v4.view.ViewPager
+        android:layout_weight="1"
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </android.support.v4.view.ViewPager>
     <com.mr_gao.bottombar.BottomNavigaterView
-        android:layout_alignParentBottom="true"
         android:id="@+id/bottom_tab"
         android:layout_width="match_parent"
-        android:layout_height="56dp">
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true">
 
     </com.mr_gao.bottombar.BottomNavigaterView>
-</RelativeLayout>
+</LinearLayout>

@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,8 +43,10 @@ public class BottomNavigaterView extends RelativeLayout {
     private float fontScale;
     private Context context;
     private FragmentTransaction fragmentTransaction;
-    private ArrayList<Fragment> fragments;
+        private ArrayList<Fragment> fragments;
     private int FragmentResId;
+    private FragmentManager fragmentManager;
+    private ViewPager viewpager;
 
     public BottomNavigaterView(Context context) {
         super(context);
@@ -62,7 +65,7 @@ public class BottomNavigaterView extends RelativeLayout {
     }
 
     private void init(Context context) {
-        this.context=context;
+        this.context = context;
         fontScale = getContext().getResources().getDisplayMetrics().scaledDensity;
         scale = getContext().getResources().getDisplayMetrics().density;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -72,9 +75,21 @@ public class BottomNavigaterView extends RelativeLayout {
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(!radio_group.getChildAt(checkedId-1).isPressed()){
+                    currentCheckIndex = checkedId;
+                    return;
+                }
                 click.click(checkedId);
-                fragmentTransaction.replace(FragmentResId,fragments.get(checkedId-1) );
-                fragmentTransaction.commitAllowingStateLoss();
+
+
+                if(fragmentManager!=null){
+
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(FragmentResId, fragments.get(checkedId - 1));
+
+                    fragmentTransaction.commitAllowingStateLoss();
+                }
+
             }
         });
         TypedArray typedArray = context.obtainStyledAttributes(R.styleable.ActionBar);
@@ -83,7 +98,6 @@ public class BottomNavigaterView extends RelativeLayout {
     }
 
     public void setData(int[] drawableres, String[] textres) {
-
 
 
     }
@@ -98,10 +112,11 @@ public class BottomNavigaterView extends RelativeLayout {
     }
 
     public void setNumber(int index, int number) {
-        NumberItem numberItem = numberItems.get(index-1 );
+        NumberItem numberItem = numberItems.get(index - 1);
         numberItem.setTextNum(number);
     }
-    public  int dp2px( float dipValue) {
+
+    public int dp2px(float dipValue) {
 
         return (int) (dipValue * scale + 0.5f);
     }
@@ -110,12 +125,17 @@ public class BottomNavigaterView extends RelativeLayout {
 
     }
 
-    public void setDataFragments(FragmentActivity activity, int[] drawableres, String[] texts, ArrayList<Fragment> fragments,int FragmentResId) {
-        this.fragments=fragments;
-        this.FragmentResId=FragmentResId;
+    public void setDataFragments(FragmentActivity activity, int[] drawableres, String[] texts, ArrayList<Fragment> fragments, int FragmentResId) {
+        this.fragments = fragments;
+        this.FragmentResId = FragmentResId;
 
-        FragmentManager fragmentManager =  activity.getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+        //  fragmentManager = activity.getSupportFragmentManager();
+
+        baseSet(drawableres, texts);
+
+    }
+
+    private void baseSet(int[] drawableres, String[] texts) {
         if (drawableres.length != texts.length)
             throw new RuntimeException(" icon数量和text数量不匹配");
 
@@ -124,9 +144,14 @@ public class BottomNavigaterView extends RelativeLayout {
 
             Drawable drawable = getContext().getResources().getDrawable(drawableres[i]);
             RadioButton radioButton = new RadioButton(getContext());
+            radioButton.setTag(index);
             radioButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    RadioButton radioButton= (RadioButton) v;
+                    if(viewpager!=null){
+                        viewpager.setCurrentItem(index);
+                    }
                     if (currentCheckIndex == index + 1) {
                         repeatClick.repeatClick(index + 1);
                     }
@@ -151,6 +176,27 @@ public class BottomNavigaterView extends RelativeLayout {
             radio_group.addView(radioButton);
             number_group.addView(numberItem);
         }
+    }
 
+    public void serDataViewPager(Activity activity, int[] image, String[] texts, ViewPager viewpager) {
+        this.viewpager=viewpager;
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+Log.e("position",position+"");
+               radio_group.check(position+1);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        baseSet(image, texts);
     }
 }
